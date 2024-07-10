@@ -1,0 +1,167 @@
+Exercise 1: Setting Up a Simple Web Page
+
+
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Web Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>My Web Page</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <p>Welcome to my web page!</p>
+  </main>
+  <footer>
+    <p>Contact us: <a href="mailto:info@example.com">info@example.com</a></p>
+  </footer>
+</body>
+</html>
+css
+
+/* style.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+header {
+  background-color: #f0f0f0;
+  padding: 20px;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav li {
+  margin-right: 20px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+footer {
+  background-color: #f0f0f0;
+  padding: 10px;
+  text-align: center;
+  clear: both;
+}
+Exercise 2: Creating a Python Web Server
+
+Let's use Flask as our Python web framework. Here's an example of how to create a Python web server that serves the HTML/CSS page:
+
+
+# app.py
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
+Run the server by executing python app.py in your terminal, and access the web page by visiting http://localhost:5000 in your browser.
+
+Exercise 3: Adding Dynamic Content
+
+Let's add a dynamic date and time to our web page using Flask's templating engine, Jinja2. We'll create a Python function to generate the dynamic content and incorporate it into our HTML template:
+
+
+# app.py (updated)
+from flask import Flask, render_template
+from datetime import datetime
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return render_template("index.html", current_time=current_time)
+
+if __name__ == "__main__":
+    app.run(debug=True)
+html
+
+
+<!-- index.html (updated) -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Web Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>My Web Page</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <p>Welcome to my web page!</p>
+    <p>Current time: {{ current_time }}</p>
+  </main>
+  <footer>
+    <p>Contact us: <a href="mailto:info@example.com">info@example.com</a></p>
+  </footer>
+</body>
+</html>
+Exercise 4: Form Handling
+
+Let's add a form to our web page to collect user data. We'll create a Python route to handle form submissions and display the submitted data:
+
+
+# app.py (updated)
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/submit", methods=["GET", "POST"])
+def submit():
+    if request.method == "POST":
+        name = request.form["name"]
+        email = request.form["email"]
+        return render_template("submit.html", name=name, email=email)
+    return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
+html
+
+
+<!-- index.html (updated) -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Web Page</title>
+  <link
